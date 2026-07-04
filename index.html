@@ -4,24 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ali Adab — Inspiration Portal</title>
-  <meta name="description" content="An inspirational personal portal for Ali Adab: mindset, wisdom, and sneakers." />
+  <meta name="description" content="A simple elegant portal for Ali Adab with one quote from David Ghiyam, one from Joe Dispenza, and a daily reminder for peace and quantum shifts." />
   <style>
     :root {
-      --bg: #f4efe6;
-      --bg2: #ece3d5;
-      --panel: rgba(255, 255, 255, 0.58);
-      --panel-strong: rgba(255, 255, 255, 0.76);
-      --ink: #171411;
-      --muted: #62574d;
-      --line: rgba(23, 20, 17, 0.12);
-      --shadow: 0 24px 70px rgba(50, 38, 27, 0.12);
-      --accent: #4b6bff;
-      --accent-2: #0e9f6e;
-      --accent-3: #b86c2b;
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --max: 1240px;
+      --bg: #f5efe5;
+      --bg2: #ece2d3;
+      --panel: rgba(255,255,255,.68);
+      --panel-strong: rgba(255,255,255,.84);
+      --ink: #1b1713;
+      --muted: #63584d;
+      --line: rgba(27,23,19,.10);
+      --accent: #4a67ff;
+      --accent2: #0e9f6e;
+      --shadow: 0 24px 70px rgba(36, 27, 18, .10);
+      --radius: 28px;
+      --max: 980px;
     }
 
     * { box-sizing: border-box; }
@@ -31,63 +28,56 @@
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(75,107,255,.12), transparent 30%),
-        radial-gradient(circle at 85% 14%, rgba(14,159,110,.10), transparent 22%),
-        radial-gradient(circle at 20% 92%, rgba(184,108,43,.10), transparent 24%),
+        radial-gradient(circle at 12% 12%, rgba(74,103,255,.12), transparent 24%),
+        radial-gradient(circle at 88% 18%, rgba(14,159,110,.10), transparent 20%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
-      overflow-x: hidden;
     }
-
-    a { color: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
 
     .grain {
       pointer-events: none;
       position: fixed;
       inset: 0;
-      opacity: 0.065;
-      mix-blend-mode: multiply;
+      opacity: .055;
       background-image:
-        linear-gradient(rgba(0,0,0,.8) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,.8) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,.9) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.9) 1px, transparent 1px);
       background-size: 3px 3px;
       mask-image: radial-gradient(circle at center, black 42%, transparent 100%);
     }
 
     .wrap {
-      width: min(var(--max), calc(100% - 32px));
+      width: min(var(--max), calc(100% - 28px));
       margin: 0 auto;
-      padding: 28px 0 40px;
+      padding: 28px 0 34px;
     }
 
-    .topbar {
+    .top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 8px 0 20px;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .mark {
-      width: 52px;
-      aspect-ratio: 1;
+      width: 50px;
+      height: 50px;
       border-radius: 18px;
       display: grid;
       place-items: center;
-      color: white;
-      background:
-        linear-gradient(145deg, rgba(75,107,255,.98), rgba(14,159,110,.9));
-      box-shadow: 0 14px 30px rgba(75,107,255,.22), inset 0 1px 0 rgba(255,255,255,.25);
+      background: linear-gradient(145deg, rgba(74,103,255,.96), rgba(14,159,110,.86));
+      color: #fff;
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.05em;
+      box-shadow: 0 14px 32px rgba(74,103,255,.18);
     }
 
     .brand small {
@@ -96,7 +86,7 @@
       text-transform: uppercase;
       letter-spacing: .18em;
       font-size: 11px;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .brand strong {
@@ -106,70 +96,30 @@
     }
 
     .topnote {
+      max-width: 420px;
       color: var(--muted);
       font-size: 13px;
       text-align: right;
-      max-width: 420px;
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) 360px;
-      gap: 20px;
-      align-items: start;
-      margin-top: 10px;
-    }
-
-    .panel {
       background: var(--panel);
-      backdrop-filter: blur(18px);
       border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 10px);
       box-shadow: var(--shadow);
-      border-radius: var(--radius-xl);
-    }
-
-    .hero-main {
-      position: relative;
+      backdrop-filter: blur(18px);
+      padding: 32px;
       overflow: hidden;
-      padding: 34px;
-      min-height: 520px;
-    }
-
-    .hero-main::before,
-    .hero-main::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(8px);
-      opacity: .9;
-      pointer-events: none;
-    }
-
-    .hero-main::before {
-      width: 320px;
-      height: 320px;
-      right: -120px;
-      top: -140px;
-      background: radial-gradient(circle, rgba(75,107,255,.18), transparent 70%);
-    }
-
-    .hero-main::after {
-      width: 260px;
-      height: 260px;
-      left: -110px;
-      bottom: -120px;
-      background: radial-gradient(circle, rgba(14,159,110,.12), transparent 70%);
     }
 
     .kicker {
-      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
+      padding: 9px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,.48);
-      border: 1px solid rgba(23,20,17,.08);
+      background: rgba(255,255,255,.52);
+      border: 1px solid rgba(27,23,19,.08);
       color: var(--muted);
       font-size: 12px;
       letter-spacing: .12em;
@@ -180,589 +130,168 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent-2);
-      box-shadow: 0 0 0 6px rgba(14,159,110,.12);
+      background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(14,159,110,.10);
       display: inline-block;
     }
 
     h1 {
-      position: relative;
-      margin: 22px 0 14px;
-      font-size: clamp(48px, 8vw, 98px);
-      line-height: .9;
+      margin: 18px 0 10px;
+      font-size: clamp(46px, 7vw, 78px);
+      line-height: .92;
       letter-spacing: -0.08em;
       text-wrap: balance;
     }
 
     .lede {
-      position: relative;
-      max-width: 680px;
-      margin: 0 0 24px;
+      max-width: 720px;
+      margin: 0;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .chips {
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-
-    .chip {
-      border: 1px solid rgba(23,20,17,.12);
-      background: rgba(255,255,255,.55);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: var(--ink);
-      box-shadow: 0 8px 24px rgba(23,20,17,.04);
-    }
-
-    .chip strong { font-weight: 700; }
-
-    .portal-cta {
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 1px solid rgba(23,20,17,.14);
-      border-radius: 999px;
-      padding: 13px 17px;
-      background: rgba(255,255,255,.78);
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 650;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-      box-shadow: 0 14px 30px rgba(23,20,17,.05);
-    }
-
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 16px 34px rgba(23,20,17,.08); }
-    .btn:focus-visible { outline: 3px solid rgba(75,107,255,.28); outline-offset: 2px; }
-    .btn.primary {
-      background: linear-gradient(145deg, rgba(75,107,255,.96), rgba(75,107,255,.84));
-      color: white;
-      border-color: transparent;
-    }
-
-    .side {
+    .grid {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 18px;
-    }
-
-    .profile {
-      padding: 22px;
-    }
-
-    .profile-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .avatar {
-      width: 62px;
-      height: 62px;
-      border-radius: 22px;
-      display: grid;
-      place-items: center;
-      color: white;
-      background: linear-gradient(160deg, #1f2937, #4b6bff 58%, #0e9f6e 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.08em;
-    }
-
-    .profile h2 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-    }
-
-    .profile p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .stat {
-      border-radius: 18px;
-      background: rgba(255,255,255,.6);
-      border: 1px solid rgba(23,20,17,.08);
-      padding: 14px 12px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 20px;
-      letter-spacing: -0.05em;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .card {
-      padding: 22px;
-      min-height: 250px;
-      position: relative;
-      overflow: hidden;
+      background: var(--panel-strong);
+      border: 1px solid rgba(27,23,19,.08);
+      border-radius: var(--radius);
+      padding: 24px;
+      min-height: 240px;
+      box-shadow: 0 12px 32px rgba(27,23,19,.05);
     }
 
-    .card .eyebrow {
+    .card .label {
       display: inline-flex;
-      gap: 8px;
       align-items: center;
+      gap: 8px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: .15em;
       font-size: 11px;
+      margin-bottom: 10px;
     }
 
-    .card .eyebrow::before {
+    .card .label::before {
       content: "";
       width: 7px;
       height: 7px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(75,107,255,.10);
     }
 
-    .card h3 {
-      margin: 14px 0 12px;
-      font-size: 24px;
+    blockquote {
+      margin: 0;
+      font-size: clamp(24px, 3.4vw, 34px);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .source {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 22px 24px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(27,23,19,.08);
+    }
+
+    .note h2 {
+      margin: 0 0 8px;
+      font-size: 26px;
       letter-spacing: -0.05em;
       line-height: 1.05;
     }
 
-    .card p {
+    .note p {
       margin: 0;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .mini-list {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .mini-list li {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.52);
-      border: 1px solid rgba(23,20,17,.08);
-      color: var(--ink);
-      font-size: 13px;
-    }
-
-    .portal {
-      margin-top: 18px;
-      padding: 24px;
-    }
-
-    .portal-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: end;
-      margin-bottom: 18px;
-    }
-
-    .portal-head h3 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: -0.05em;
-      line-height: 1;
-    }
-
-    .portal-head p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      max-width: 640px;
-      font-size: 14px;
-    }
-
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .tab {
-      border: 1px solid rgba(23,20,17,.12);
-      background: rgba(255,255,255,.5);
-      color: var(--ink);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 650;
-      cursor: pointer;
-    }
-
-    .tab[aria-selected="true"] {
-      background: var(--ink);
-      color: #fff;
-      border-color: var(--ink);
-    }
-
-    .portal-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) 300px;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .focus {
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.55));
-      border: 1px solid rgba(23,20,17,.08);
-      padding: 22px;
-      min-height: 260px;
-    }
-
-    .focus .label {
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-size: 11px;
-      margin-bottom: 10px;
-    }
-
-    .focus h4 {
-      margin: 0 0 10px;
-      font-size: 30px;
-      letter-spacing: -0.06em;
-      line-height: 1.02;
-    }
-
-    .focus p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.7;
-      max-width: 700px;
+      max-width: 740px;
     }
-
-    .focus ul {
-      margin: 18px 0 0;
-      padding-left: 20px;
-      color: var(--ink);
-      display: grid;
-      gap: 10px;
-    }
-
-    .aside-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .aside-card {
-      padding: 20px;
-      border-radius: 28px;
-      background: rgba(255,255,255,.6);
-      border: 1px solid rgba(23,20,17,.08);
-    }
-
-    .aside-card h4 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.03em;
-    }
-
-    .aside-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .sneaker-shelf {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .sneaker-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(23,20,17,.08);
-      font-size: 13px;
-    }
-
-    .sneaker-item span:last-child { color: var(--muted); }
 
     .footer {
-      margin-top: 18px;
       display: flex;
       justify-content: space-between;
-      gap: 14px;
-      align-items: center;
+      gap: 16px;
       flex-wrap: wrap;
+      margin-top: 18px;
       color: var(--muted);
       font-size: 12px;
-      padding: 10px 4px 0;
+      padding: 4px 2px 0;
     }
 
     .footer strong { color: var(--ink); }
 
-    @media (max-width: 1080px) {
-      .hero, .portal-body { grid-template-columns: 1fr; }
-      .topbar, .portal-head { align-items: start; flex-direction: column; }
+    @media (max-width: 860px) {
+      .top, .footer { flex-direction: column; align-items: start; }
       .topnote { text-align: left; }
-      .card-grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .wrap { width: min(var(--max), calc(100% - 20px)); padding-top: 12px; }
-      .hero-main, .profile, .portal, .card { padding: 20px; }
-      h1 { font-size: clamp(42px, 15vw, 72px); }
-      .portal-head h3 { font-size: 24px; }
-      .focus h4 { font-size: 24px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .btn, .tab { transition: none; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 22px; }
     }
   </style>
 </head>
 <body>
   <div class="grain"></div>
   <main class="wrap">
-    <div class="topbar">
+    <header class="top">
       <div class="brand" aria-label="Ali Adab portal home">
         <div class="mark">AA</div>
         <div>
-          <small>Personal portal</small>
+          <small>Daily portal</small>
           <strong>Ali Adab</strong>
         </div>
       </div>
       <div class="topnote">
-        Built as an uplifting, offline-ready portal for the things he loves most: <strong>Joe Dispenza</strong>, <strong>David Ghiyam</strong>, and <strong>sneakers</strong>.
+        A simple, elegant place for peace, perspective, and a daily quantum shift.
       </div>
-    </div>
+    </header>
 
     <section class="hero">
-      <article class="panel hero-main">
-        <div class="kicker"><i></i> discipline / belief / rotation</div>
-        <h1>Build the vision.<br/>Wear it with confidence.</h1>
-        <p class="lede">
-          A quiet portal for Ali Adab — part inspiration board, part launchpad. It is designed to remind him that the right mindset, the right guidance, and the right style all move in the same direction: forward.
-        </p>
-        <div class="chips" aria-label="core interests">
-          <span class="chip"><strong>Joe Dispenza</strong> — reset the mind</span>
-          <span class="chip"><strong>David Ghiyam</strong> — lead with purpose</span>
-          <span class="chip"><strong>Sneakers</strong> — express the identity</span>
-        </div>
-        <div class="portal-cta">
-          <button class="btn primary" data-jump="mind">Fuel mindset</button>
-          <button class="btn" data-jump="wisdom">Read wisdom</button>
-          <button class="btn" data-jump="sneakers">Study rotation</button>
-        </div>
-      </article>
+      <div class="kicker"><i></i> simple / elegant / intentional</div>
+      <h1>Visit once a day.<br/>Return to peace.</h1>
+      <p class="lede">
+        This portal is intentionally minimal: two powerful reminders, one calm space, and one invitation to reset.
+      </p>
 
-      <aside class="side">
-        <section class="panel profile">
-          <div class="profile-head">
-            <div class="avatar">AA</div>
-            <div>
-              <h2>Ali Adab</h2>
-              <p>Portal mode: calm, focused, elevated.</p>
-            </div>
-          </div>
-          <p>
-            A simple control center for daily focus — the kind of page you open before the day gets noisy, and leave feeling stronger.
-          </p>
-          <div class="stats" aria-label="portal summary">
-            <div class="stat"><strong>3</strong><span>core loves</span></div>
-            <div class="stat"><strong>1</strong><span>clean rhythm</span></div>
-            <div class="stat"><strong>∞</strong><span>rotation energy</span></div>
-          </div>
-        </section>
-      </aside>
-    </section>
-
-    <section class="card-grid" aria-label="interest cards">
-      <article class="panel card" id="mind">
-        <div class="eyebrow">Mindset</div>
-        <h3>Reset the internal state.</h3>
-        <p>Inspired by the meditative, intentional lane — breathe, re-center, and start from a stronger signal before the day starts making demands.</p>
-        <ul class="mini-list">
-          <li>Morning reset before messages</li>
-          <li>Focus on repetition, not noise</li>
-          <li>Protect the first hour</li>
-        </ul>
-      </article>
-
-      <article class="panel card" id="wisdom">
-        <div class="eyebrow">Wisdom</div>
-        <h3>Keep the message simple.</h3>
-        <p>For the David Ghiyam side of the world: clarity, purpose, and a steady read on what actually matters once the surface-level noise clears.</p>
-        <ul class="mini-list">
-          <li>Clarity over complexity</li>
-          <li>Faith + discipline + consistency</li>
-          <li>One decision at a time</li>
-        </ul>
-      </article>
-
-      <article class="panel card" id="sneakers">
-        <div class="eyebrow">Sneakers</div>
-        <h3>Make the rotation feel curated.</h3>
-        <p>Build the sneaker shelf like a collection, not a pile: daily drivers, statement pairs, and the special ones that wait for the right moment.</p>
-        <ul class="mini-list">
-          <li>White-on-white essentials</li>
-          <li>Retro runners and clean lows</li>
-          <li>Statement pair for nights out</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="panel portal" aria-label="interactive portal">
-      <div class="portal-head">
-        <div>
-          <h3>Portal strip</h3>
-          <p>Click a tab to shift the page’s focus. It’s a small interaction, but it makes the portal feel alive instead of static.</p>
-        </div>
-      </div>
-
-      <div class="tabs" role="tablist" aria-label="portal tabs">
-        <button class="tab" role="tab" aria-selected="true" data-tab="overview">Overview</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="mind">Mindset</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="wisdom">Wisdom</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="sneakers">Sneakers</button>
-      </div>
-
-      <div class="portal-body">
-        <article class="focus" id="focus-panel" aria-live="polite">
-          <div class="label" id="focus-label">Overview</div>
-          <h4 id="focus-title">A portal with a clear vibe.</h4>
-          <p id="focus-copy">
-            This page is designed to feel like a personal dashboard with taste: less clutter, more intention, and enough editorial polish to make the interests feel curated.
-          </p>
-          <ul id="focus-list">
-            <li>Morning focus</li>
-            <li>Notes and inspiration</li>
-            <li>Sneaker rotation watch</li>
-          </ul>
+      <div class="grid">
+        <article class="card">
+          <div class="label">David Ghiyam</div>
+          <blockquote>“The less you depend on external circumstances for your peace, the more magnetic you become.”</blockquote>
+          <div class="source">A reminder to keep peace internal.</div>
         </article>
 
-        <div class="aside-stack">
-          <section class="aside-card">
-            <h4>Rotation notes</h4>
-            <p>Think of the sneaker lane as a shelf, not a dump: cleaner structure, better decision-making, more satisfying to browse.</p>
-            <div class="sneaker-shelf">
-              <div class="sneaker-item"><span>Daily wear</span><span>clean + versatile</span></div>
-              <div class="sneaker-item"><span>Weekend pair</span><span>more character</span></div>
-              <div class="sneaker-item"><span>Special pair</span><span>save for the moment</span></div>
-            </div>
-          </section>
-          <section class="aside-card">
-            <h4>Portal note</h4>
-            <p>Everything here is intentionally lightweight and ready to publish as a standalone web page.</p>
-          </section>
-        </div>
+        <article class="card">
+          <div class="label">Joe Dispenza</div>
+          <blockquote>“The only way we can change our lives is to change our energy — to change the electromagnetic field we are constantly broadcasting.”</blockquote>
+          <div class="source">A reminder that shifts start within.</div>
+        </article>
+      </div>
+
+      <section class="note">
+        <h2>Ali, come here once a day.</h2>
+        <p>
+          Read the two quotes, breathe for a moment, and let this be your reset: peace first, then the quantum shift.
+        </p>
+      </section>
+
+      <div class="footer">
+        <span><strong>Ali Adab Inspiration Portal</strong></span>
+        <span>Minimal, calm, and built for daily return.</span>
       </div>
     </section>
-
-    <div class="footer">
-      <span><strong>Ali Adab Portal</strong> — made to feel calm, premium, and personal.</span>
-      <span>Published as a single HTML page.</span>
-    </div>
   </main>
-
-  <script>
-    const data = {
-      overview: {
-        label: 'Overview',
-        title: 'A portal with a clear vibe.',
-        copy: 'This page is designed to feel like a personal dashboard with taste: less clutter, more intention, and enough editorial polish to make the interests feel curated.',
-        list: ['Morning focus', 'Notes and inspiration', 'Sneaker rotation watch']
-      },
-      mind: {
-        label: 'Mindset',
-        title: 'Reset the internal state.',
-        copy: 'Use this section for the quiet, repeatable parts of the day: reflection, meditation, and a clean mental start before everything speeds up.',
-        list: ['Breathe first', 'Start with stillness', 'Protect the first hour']
-      },
-      wisdom: {
-        label: 'Wisdom',
-        title: 'Keep the message simple.',
-        copy: 'Keep the page anchored in clarity, purpose, and practical alignment — the kind of wisdom that helps you decide what matters and ignore the rest.',
-        list: ['Clarity over complexity', 'Faith + discipline + consistency', 'One decision at a time']
-      },
-      sneakers: {
-        label: 'Sneakers',
-        title: 'Make the rotation feel curated.',
-        copy: 'Treat the sneaker collection like a gallery: the daily pair, the statement pair, and the special pair all deserve their own place.',
-        list: ['White-on-white essentials', 'Retro runners and clean lows', 'Statement pair for nights out']
-      }
-    };
-
-    const focusLabel = document.getElementById('focus-label');
-    const focusTitle = document.getElementById('focus-title');
-    const focusCopy = document.getElementById('focus-copy');
-    const focusList = document.getElementById('focus-list');
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-
-    function setActive(tabKey) {
-      const item = data[tabKey] || data.overview;
-      focusLabel.textContent = item.label;
-      focusTitle.textContent = item.title;
-      focusCopy.textContent = item.copy;
-      focusList.innerHTML = item.list.map(v => `<li>${v}</li>`).join('');
-      tabs.forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.tab === tabKey)));
-    }
-
-    tabs.forEach(tab => tab.addEventListener('click', () => setActive(tab.dataset.tab)));
-
-    document.querySelectorAll('[data-jump]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.jump;
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setActive(id);
-      });
-    });
-  </script>
 </body>
 </html>
