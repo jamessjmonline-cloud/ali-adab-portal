@@ -158,6 +158,50 @@
       margin-top: 18px;
     }
 
+    .place-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(27,23,19,.08);
+      border-radius: 22px;
+      padding: 12px;
+      min-height: 94px;
+      box-shadow: 0 10px 28px rgba(27,23,19,.04);
+    }
+
+    .place-photo {
+      width: 78px;
+      height: 78px;
+      border-radius: 18px;
+      object-fit: cover;
+      flex: 0 0 auto;
+      border: 1px solid rgba(27,23,19,.08);
+    }
+
+    .place-copy .label {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .place-copy strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .place-copy span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .meta-card {
       background: rgba(255,255,255,.72);
       border: 1px solid rgba(27,23,19,.08);
@@ -323,12 +367,23 @@
       </p>
 
       <div class="meta-grid" aria-label="daily info">
+        <article class="place-card">
+          <img class="place-photo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Wimbledon_Windmill.jpg" alt="Wimbledon Windmill on Wimbledon Common" />
+          <div class="place-copy">
+            <span class="label">Wimbledon, UK</span>
+            <strong>Your birthplace</strong>
+            <span>A beautiful place to remember where it began.</span>
+          </div>
+        </article>
         <article class="meta-card">
           <span class="label">Clock</span>
           <p class="clock" id="clock">--:-- --</p>
           <div class="weather-sub">A calm daily check-in, updated live.</div>
         </article>
-        <article class="meta-card">
+      </div>
+
+      <div class="meta-grid" aria-label="weather info" style="margin-top:12px;">
+        <article class="meta-card" style="grid-column:1 / -1;">
           <span class="label">Vancouver weather</span>
           <div class="weather-main"><strong id="temp">--°C</strong><span id="condition">Loading…</span></div>
           <div class="weather-sub" id="weather-detail">High/low and local conditions for Vancouver, BC.</div>
