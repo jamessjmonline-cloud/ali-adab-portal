@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ali Adab — Inspiration Portal</title>
-  <meta name="description" content="A simple elegant portal for Ali Adab with one quote from David Ghiyam, one from Joe Dispenza, and a daily reminder for peace and quantum shifts." />
+  <meta name="description" content="A simple elegant portal for Ali Adab with one quote from David Ghiyam, one from Joe Dispenza, a daily clock, and weather for Vancouver BC." />
   <style>
     :root {
       --bg: #f5efe5;
@@ -151,6 +151,62 @@
       line-height: 1.7;
     }
 
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(27,23,19,.08);
+      border-radius: 22px;
+      padding: 16px 18px;
+      min-height: 94px;
+      box-shadow: 0 10px 28px rgba(27,23,19,.04);
+    }
+
+    .meta-card .label {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .clock {
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.06em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .weather-main {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .weather-main strong {
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .weather-main span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .weather-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -238,7 +294,7 @@
     @media (max-width: 860px) {
       .top, .footer { flex-direction: column; align-items: start; }
       .topnote { text-align: left; }
-      .grid { grid-template-columns: 1fr; }
+      .grid, .meta-grid { grid-template-columns: 1fr; }
       .hero { padding: 22px; }
     }
   </style>
@@ -263,8 +319,21 @@
       <div class="kicker"><i></i> simple / elegant / intentional</div>
       <h1>Visit once a day.<br/>Return to peace.</h1>
       <p class="lede">
-        This portal is intentionally minimal: two powerful reminders, one calm space, and one invitation to reset.
+        This portal is intentionally minimal: two powerful reminders, a daily clock, Vancouver weather, and one invitation to reset.
       </p>
+
+      <div class="meta-grid" aria-label="daily info">
+        <article class="meta-card">
+          <span class="label">Clock</span>
+          <p class="clock" id="clock">--:-- --</p>
+          <div class="weather-sub">A calm daily check-in, updated live.</div>
+        </article>
+        <article class="meta-card">
+          <span class="label">Vancouver weather</span>
+          <div class="weather-main"><strong id="temp">--°C</strong><span id="condition">Loading…</span></div>
+          <div class="weather-sub" id="weather-detail">High/low and local conditions for Vancouver, BC.</div>
+        </article>
+      </div>
 
       <div class="grid">
         <article class="card">
@@ -283,7 +352,7 @@
       <section class="note">
         <h2>Ali, come here once a day.</h2>
         <p>
-          Read the two quotes, breathe for a moment, and let this be your reset: peace first, then the quantum shift.
+          Read the two quotes, look at the time, check the weather, breathe for a moment, and let this be your reset: peace first, then the quantum shift.
         </p>
       </section>
 
@@ -293,5 +362,67 @@
       </div>
     </section>
   </main>
+
+  <script>
+    const clockEl = document.getElementById('clock');
+    const tempEl = document.getElementById('temp');
+    const conditionEl = document.getElementById('condition');
+    const detailEl = document.getElementById('weather-detail');
+
+    function updateClock() {
+      const now = new Date();
+      clockEl.textContent = new Intl.DateTimeFormat('en-CA', {
+        hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true,
+        timeZone: 'America/Vancouver'
+      }).format(now).replace(/\s/g, ' ');
+    }
+
+    const weatherCodes = {
+      0: 'Clear', 1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Cloudy', 45: 'Fog', 48: 'Fog',
+      51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle', 61: 'Light rain', 63: 'Rain',
+      65: 'Heavy rain', 71: 'Light snow', 73: 'Snow', 75: 'Heavy snow', 80: 'Rain showers',
+      81: 'Rain showers', 82: 'Heavy showers', 95: 'Thunderstorm'
+    };
+
+    async function loadWeather() {
+      try {
+        const geo = await fetch('https://geocoding-api.open-meteo.com/v1/search?name=Vancouver%20BC&count=1&language=en&format=json&country_code=CA');
+        const geoData = await geo.json();
+        const place = geoData.results && geoData.results[0];
+        const lat = place.latitude;
+        const lon = place.longitude;
+
+        const url = new URL('https://api.open-meteo.com/v1/forecast');
+        url.search = new URLSearchParams({
+          latitude: lat,
+          longitude: lon,
+          current: 'temperature_2m,weather_code',
+          daily: 'temperature_2m_max,temperature_2m_min,weather_code',
+          timezone: 'America/Vancouver'
+        }).toString();
+
+        const res = await fetch(url);
+        const data = await res.json();
+        const current = data.current;
+        const daily = data.daily;
+        const code = current?.weather_code ?? daily?.weather_code?.[0];
+        const desc = weatherCodes[code] || 'Weather';
+        const max = daily?.temperature_2m_max?.[0];
+        const min = daily?.temperature_2m_min?.[0];
+
+        tempEl.textContent = `${Math.round(current.temperature_2m)}°C`;
+        conditionEl.textContent = desc;
+        detailEl.textContent = `${place.name}, ${place.admin1 || 'BC'} · High ${Math.round(max)}° / Low ${Math.round(min)}° · ${desc}`;
+      } catch (err) {
+        tempEl.textContent = '—';
+        conditionEl.textContent = 'Weather unavailable';
+        detailEl.textContent = 'Could not load Vancouver weather right now.';
+      }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+    loadWeather();
+  </script>
 </body>
 </html>
